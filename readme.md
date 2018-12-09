@@ -44,7 +44,7 @@ appsettings.json:
  }
 ```
 
-To run server application use `output-directory=C:\D\output`
+To run server application use `output-directory={output directory}`
 
 ```
 {
