@@ -16,7 +16,7 @@ namespace FolderSyncer.Core.Network.ReceiverStrategies
     /// For each segment it calculate hash and trying to find this hash in cache folder.
     /// If hash was founded, it read value from cache folder, if not - from network.
     /// </summary>
-    public class ChangeFileReceiverStrategy : IFileReceiverStrategy
+    public class ChangeReceiverStrategy : IFileReceiverStrategy
     {
         private readonly IFileSystem _fileSystem;
         private readonly HashAlgorithm _hashAlgorithm;
@@ -26,7 +26,7 @@ namespace FolderSyncer.Core.Network.ReceiverStrategies
         private readonly string _outputDirectory;
         private readonly int _hashSize;
 
-        public ChangeFileReceiverStrategy(IProtocolDialogServer dialogServer,
+        public ChangeReceiverStrategy(IProtocolDialogServer dialogServer,
             IConfiguration configuration,
             HashAlgorithm hashAlgorithm,
             IFileSystem fileSystem)

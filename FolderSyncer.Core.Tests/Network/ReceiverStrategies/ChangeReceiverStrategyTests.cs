@@ -28,7 +28,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
 
             // Act -> Assert
             Assert.Throws<ArgumentNullException>(() =>
-                new ChangeFileReceiverStrategy(null, configuration.Object, hashAlgorithm.Object, fileSystem.Object));
+                new ChangeReceiverStrategy(null, configuration.Object, hashAlgorithm.Object, fileSystem.Object));
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
 
             // Act -> Assert
             Assert.Throws<ArgumentNullException>(() =>
-                new ChangeFileReceiverStrategy(dialogServer.Object, null, hashAlgorithm.Object, fileSystem.Object));
+                new ChangeReceiverStrategy(dialogServer.Object, null, hashAlgorithm.Object, fileSystem.Object));
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
 
             // Act -> Assert
             Assert.Throws<ArgumentNullException>(() =>
-                new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, null, fileSystem.Object));
+                new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, null, fileSystem.Object));
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
 
             // Act -> Assert
             Assert.Throws<ArgumentNullException>(() =>
-                new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm.Object, null));
+                new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm.Object, null));
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             var dialogServer = MockDialogServer(_correctHash);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert
@@ -97,7 +97,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             var dialogServer = MockDialogServer(_incorrectHash);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert
@@ -114,7 +114,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             var dialogServer = MockDialogServer(_incorrectHash);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert
@@ -133,7 +133,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             var dialogServer = MockDialogServer(_incorrectHash);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert
@@ -156,7 +156,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             SetupDialogSegmentPolicy(dialogServer);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert
@@ -179,7 +179,7 @@ namespace FolderSyncer.Core.Tests.Network.ReceiverStrategies
             SetupDialogSegmentPolicy(dialogServer);
 
             // Act
-            var receiveStrategy = new ChangeFileReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
+            var receiveStrategy = new ChangeReceiverStrategy(dialogServer.Object, configuration.Object, hashAlgorithm, fileSystem.Object);
             receiveStrategy.ProcessRequest();
 
             // Assert

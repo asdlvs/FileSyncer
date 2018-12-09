@@ -13,7 +13,7 @@ namespace FolderSyncer.Core.Network.ReceiverStrategies
     /// If it was received for file - it execute ChangeReceverStrategy,
     /// if for folder - just create it.
     /// </summary>
-    public class CreateReceiverStrategy : ChangeFileReceiverStrategy
+    public class CreateReceiverStrategy : ChangeReceiverStrategy
     {
         private readonly IFileSystem _fileSystem;
         private readonly IConfiguration _configuration;

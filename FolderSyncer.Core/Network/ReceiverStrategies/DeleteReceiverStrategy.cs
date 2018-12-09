@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 namespace FolderSyncer.Core.Network.ReceiverStrategies
 {
     /// <summary>
-    /// Delete file of folder
+    /// Delete file or folder.
     /// </summary>
     public class DeleteReceiverStrategy : IFileReceiverStrategy
     {

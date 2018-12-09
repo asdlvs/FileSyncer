@@ -26,7 +26,7 @@ namespace FolderSyncer.Core.Network
                 socket,
                 new Dictionary<FileAction, Func<IProtocolDialogServer, IFileReceiverStrategy>>
                 {
-                    { FileAction.Change, dialog => new ChangeFileReceiverStrategy(dialog, configuration, hashAlgorithm(), fileSystem) },
+                    { FileAction.Change, dialog => new ChangeReceiverStrategy(dialog, configuration, hashAlgorithm(), fileSystem) },
                     { FileAction.Create, dialog => new CreateReceiverStrategy(dialog, configuration, hashAlgorithm(), fileSystem) },
                     { FileAction.Delete, dialog => new DeleteReceiverStrategy(dialog, configuration, fileSystem) },
                     { FileAction.Rename, dialog => new RenameReceiverStrategy(dialog, configuration, fileSystem) }

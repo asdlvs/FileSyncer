@@ -13,8 +13,8 @@ using Serilog;
 namespace FolderSyncer.Core.Network
 {
     /// <summary>
-    /// Dispatcher class that read file/directory event,
-    /// create task for each event, choose strategy and execute it.
+    /// Dispatcher class that reads events from channel,
+    /// creates task for each event, chooses strategy and execute it.
     /// </summary>
     public class TransferManager : ITransferManager
     {
