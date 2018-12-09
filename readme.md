@@ -6,6 +6,31 @@ Folder syncer is lightweight tool for one-side folder synchronization.
 
 FolderSyncer doesn't use any highlevel libraries. Everything is based on some funny proprietary protocol. The idea of this protocol is to make life simple.
 
+### Protocol
+After establishing connection, client send header that is common for all actions:
+| 1 byte | 1 byte | 1 byte | 4 bytes | <- bytes |
+|---------------|---------------|----------------|----------------|----------------|
+| Version       | Action        | FileType       | Filename size  | Filename       |
+
+If action is `delete`, not further information is required.
+If action is `rename`, client send
+1 byte          | <- byte | 
+|---------------|---------------|
+| New name size       | New name
+If action is `change` or `create` for file:
+16 bytes        | 
+|---------------|
+| Hash          |
+After sending hash, client turn into reading mode, and waiting for answer from server.
+Server should answer 0 if current hash doesn't exist, and 1 is hash exists.
+If answer is 1, execution will be stopped. Otherwise client read segment with configurable size, calculate its hash and send it to server.
+16 bytes        | 
+|---------------|
+| Hash          |
+After sending hash, client turn into reading mode, and waiting for answer from server.
+Server should answer 0 if current hash doesn't exist, and 1 is hash exists.
+If answer is 1 client skip current segment and start processing the next one, if answer is 0, client start sending byte of current segment.
+
 ### Client side.
 `DirectoryMonitor` - Initializes parsing of working directory and starts monitoring of this directory. Each event is sent to Channel.
 
