@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FolderSyncer.Client": {
+      "commandName": "Project",
+      "commandLineArgs": "directory-path=C:\\D\\monitor"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FolderSyncer.Server": {
+      "commandName": "Project",
+      "commandLineArgs": "output-directory=C:\\D\\output"
+    }
+  }
+}
