@@ -113,13 +113,13 @@ namespace FolderSyncer.Core.Tests.Monitor
             // Act
             var directoryMonitor = new DirectoryMonitor(configuration.Object, channel.Object, fileSystem.Object);
             directoryMonitor.StartMonitoring();
-            fileSystemWatcher.Raise(watcher => watcher.Changed += null, new FileSystemEventArgs(WatcherChangeTypes.Changed, directory, "a.txt"));
+            fileSystemWatcher.Raise(watcher => watcher.Deleted += null, new FileSystemEventArgs(WatcherChangeTypes.Deleted, directory, "a.txt"));
 
             // Assert
             channel.Verify(chan => chan.AddFile(It.Is<FileModel>(model =>
                 model.FullPath == "C:\\MyFolder\\a.txt" &&
                 model.RelativePath == "a.txt" &&
-                model.FileAction == FileAction.Change)), Times.Once);
+                model.FileAction == FileAction.Delete)), Times.Once);
 
             channel.VerifyNoOtherCalls();
         }

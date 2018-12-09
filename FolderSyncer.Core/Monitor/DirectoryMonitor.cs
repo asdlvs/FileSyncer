@@ -95,8 +95,24 @@ namespace FolderSyncer.Core.Monitor
         {
             return (sender, args) =>
             {
+                if (DirectoryWithContentWasAdded(args)) { return; }
                 SendFile(args.FullPath, action);
             };
+        }
+
+        private bool DirectoryWithContentWasAdded(FileSystemEventArgs args)
+        {
+            if (args.ChangeType == WatcherChangeTypes.Changed)
+            {
+                FileAttributes attr = _fileSystem.File.GetAttributes(args.FullPath);
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    ParseDirectory(args.FullPath);
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
