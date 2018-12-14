@@ -34,6 +34,10 @@ namespace FolderSyncer.Core.Network.ReceiverStrategies
             FileAttributes attr = _fileSystem.File.GetAttributes(absolutePath);
             if (attr.HasFlag(FileAttributes.Directory))
             {
+                if (_fileSystem.Directory.Exists(to))
+                {
+                    _fileSystem.Directory.Delete(to);
+                }
                 _fileSystem.Directory.Move(from, to);
             }
             else
