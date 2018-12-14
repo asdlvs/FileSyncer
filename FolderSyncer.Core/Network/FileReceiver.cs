@@ -81,8 +81,7 @@ namespace FolderSyncer.Core.Network
                 var dialogServer = new ProtocolDialogServer(sourceStream);
                 var dialogData = dialogServer.AcceptDialog();
 
-                Log.Information(
-                    $"Received event {dialogData.FileAction} for file {dialogData.RelativeFilePath}.");
+                Log.Information($"Received event {dialogData.FileAction} for file {dialogData.RelativeFilePath}.");
 
                 var constructor = _fileStrategies[dialogData.FileAction];
                 IFileReceiverStrategy currentStrategy = constructor(dialogServer);

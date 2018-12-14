@@ -90,7 +90,6 @@ namespace FolderSyncer.Core.Network.ReceiverStrategies
 
             RemoveExistingFile(absolutePath);
             _fileSystem.File.Move(tmpFilePath, absolutePath);
-            Log.Information($"Processing of file {absolutePath} is done.");
         }
 
         private bool ClientAndServerFileHashesAreEqual(string absolutePath)

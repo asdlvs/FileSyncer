@@ -112,7 +112,7 @@ namespace FolderSyncer.Core.Network
                 }
 
                 fileModel.FileType = GetFileType(fileModel.FullPath);
-                Log.Information($"Sending {fileModel.FileAction} event for file {fileModel.RelativePath}.");
+                Log.Debug($"Sending {fileModel.FileAction} event for file {fileModel.RelativePath}.");
                 using (var socket = _socketFactory().Connect(_configuration["ip"], int.Parse(_configuration["port"])))
                 using (var destinationStream = socket.GetStream())
                 {
@@ -142,7 +142,7 @@ namespace FolderSyncer.Core.Network
 
             try
             {
-                stream = _fileSystem.File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                stream = _fileSystem.File.Open(path, FileMode.Open, FileAccess.Read, FileShare.None);
             }
             catch (IOException)
             {

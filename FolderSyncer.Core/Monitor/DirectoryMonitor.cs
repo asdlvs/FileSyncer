@@ -82,7 +82,6 @@ namespace FolderSyncer.Core.Monitor
 
         private void SendFile(string absolutePath, FileAction action)
         {
-            Log.Information($"Event {action} for file {absolutePath} was received.");
             _channel.AddFile(new FileModel
             {
                 RelativePath = GetRelativePath(absolutePath, _directoryPath),
