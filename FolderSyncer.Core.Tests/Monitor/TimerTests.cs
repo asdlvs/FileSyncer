@@ -35,7 +35,7 @@ namespace FolderSyncer.Core.Tests.Monitor
             Thread.Sleep(200);
 
             // Assert
-            Assert.InRange(counter, 5, 6);
+            Assert.InRange(counter, 4, 6);
         }
 
         [Fact]

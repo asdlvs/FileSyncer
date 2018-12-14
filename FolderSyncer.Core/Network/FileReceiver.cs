@@ -55,35 +55,38 @@ namespace FolderSyncer.Core.Network
             while (true)
             {
                 var acceptedConnection = serverSocket.Accept();
-                yield return Task.Run(() => ProcessAcceptedConnection(acceptedConnection));
+                yield return Task.Run(() =>
+                {
+                    try
+                    {
+                        ProcessAcceptedConnection(acceptedConnection);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex.Message);
+                        throw;
+                    }
+                    finally
+                    {
+                        acceptedConnection.Dispose();
+                    }
+                });
             }
         }
 
         private void ProcessAcceptedConnection(ISocket acceptedConnection)
         {
-            try
+            using (var sourceStream = acceptedConnection.GetStream())
             {
-                using (var sourceStream = acceptedConnection.GetStream())
-                {
-                    var dialogServer = new ProtocolDialogServer(sourceStream);
-                    var dialogData = dialogServer.AcceptDialog();
+                var dialogServer = new ProtocolDialogServer(sourceStream);
+                var dialogData = dialogServer.AcceptDialog();
 
-                    Log.Information(
-                        $"Received event {dialogData.FileAction} for file {dialogData.RelativeFilePath}.");
+                Log.Information(
+                    $"Received event {dialogData.FileAction} for file {dialogData.RelativeFilePath}.");
 
-                    var constructor = _fileStrategies[dialogData.FileAction];
-                    IFileReceiverStrategy currentStrategy = constructor(dialogServer);
-                    currentStrategy.ProcessRequest();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message);
-                throw;
-            }
-            finally
-            {
-                acceptedConnection.Dispose();
+                var constructor = _fileStrategies[dialogData.FileAction];
+                IFileReceiverStrategy currentStrategy = constructor(dialogServer);
+                currentStrategy.ProcessRequest();
             }
         }
     }
